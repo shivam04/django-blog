@@ -1,0 +1,108 @@
+{% load staticfiles %}
+<!--DOCTYPE html-->
+<html>
+<head>
+	<title>{% block head_title %}Blog{% endblock head_title %}</title>
+	<style type="text/css">
+		.wmd-panel{
+	margin-right: 0px !important;
+	margin-left: 0px !important;
+}
+	</style>
+	<link rel="stylesheet" href='{% static "css/base.css" %}' />
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+{% block head_extra %} {% endblock head_extra %}
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+	
+{% include "message_display.html" %}
+
+
+<div class="container">
+	<ol class='breadcrumb'>
+		<li><a href='{% url "posts:lists" %}'>Home</a>
+		{% block post_detail_link %}
+		{% endblock %}
+		{% if not request.user.is_authenticated %}
+			<li class='pull-right'><a href='{% url "register" %}'>Register</a></li>
+			<li class='pull-right'><a href='{% url "login" %}'>Login</a></li>
+		{% else %}
+			<li class='pull-right'><a href='{% url "logout" %}'>Logout</a></li>
+		{% endif %}
+	</ol>
+	{% block content %}
+
+	{% endblock content %}
+</div>
+<!-- <img src='{% static "images/taj.jpg" %}' height="100" width="100" /> -->
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".content-markdown").each(function(){
+			var content = $(this).text()
+			var contentMarked = marked(content)
+			$(this).html(contentMarked)
+		})
+		$(".post-detail-item img").each(function(){
+			$(this).addClass("img-responsive");
+		})
+		$(".comment-reply-btn").click(function(event){
+			event.preventDefault();
+			//alert("yo");
+			$(this).parent().next(".comment-reply").fadeToggle();
+		});
+		var contentInput = $('#id_content');
+		function setContent(value){
+			var markedContent = marked(value)
+			$('#preview-content').html(markedContent)
+			$("#preview-content img").each(function(){
+				$(this).addClass("img-responsive");
+			})
+		}
+		setContent(contentInput.val())
+		contentInput.keyup(function(){
+			var newContent = $(this).val()
+			setContent(newContent)
+		})
+
+		function setTitle(value){
+			$('#preview-title').text(value)
+		}
+		var titleInput = $('#id_title');
+		setTitle(titleInput.val())
+		titleInput.keyup(function(){
+			var newTitle = $(this).val();
+			setTitle(newTitle);
+		})
+
+		
+	})
+</script>
+</body>
+
+</html>
+
+
+
