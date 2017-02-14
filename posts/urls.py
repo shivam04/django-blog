@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/$', "posts.views.posts_detail",name="detail"),
     url(r'^(?P<slug>[\w-]+)/edit/$', "posts.views.posts_update",name="update"),
     url(r'^(?P<slug>[\w-]+)/delete/$', "posts.views.posts_delete"),
+
 ]

@@ -10,6 +10,13 @@ from .forms import PostForm
 from comments.forms import CommentForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from api.serializers import (
+	PostListSerializer,
+	PostDetailSerializer,
+	PostCreateUpdateSerializer,
+	)
 # Create your views here.
 def posts_create(request):
 	if not request.user.is_staff or not request.user.is_superuser:
@@ -138,3 +145,12 @@ def posts_delete(request,slug=None):
 	instance.delete()
 	messages.success(request,"Successfully Deleted")
 	return redirect("posts:lists")
+
+class PostList(APIView):
+	def get(self,request):
+		queryset = Post.objects.all()
+		serializers = PostListSerializer
+		print serializers.data
+		return Response(serializers.data)
+	# queryset = Post.objects.all()
+	# serializer_class = PostListSerializer
