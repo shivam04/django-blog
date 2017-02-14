@@ -186,15 +186,15 @@ curl http://127.0.0.1:8000/api/comments/
 #    'social.apps.django_app.context_processors.backends',
 #    'social.apps.django_app.context_processors.login_redirect',
 # )
-AUTHENTICATION_BACKENDS = (
-    'social.backends.github.GithubOAuth2',
-    'social.backends.twitter.TwitterOAuth',
-    'social.backends.facebook.FacebookOAuth2',
+# AUTHENTICATION_BACKENDS = (
+#     'social.backends.github.GithubOAuth2',
+#     'social.backends.twitter.TwitterOAuth',
+#     'social.backends.facebook.FacebookOAuth2',
 
-    'django.contrib.auth.backends.ModelBackend',
-)
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'home'
-SOCIAL_AUTH_FACEBOOK_KEY = '338437893216674'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'fa0a933274e15515e74c0509fd724062'
+#     'django.contrib.auth.backends.ModelBackend',
+# )
+# LOGIN_URL = 'login'
+# LOGOUT_URL = 'logout'
+# LOGIN_REDIRECT_URL = 'home'
+# SOCIAL_AUTH_FACEBOOK_KEY = '338437893216674'  # App ID
+# SOCIAL_AUTH_FACEBOOK_SECRET = 'fa0a933274e15515e74c0509fd724062'
