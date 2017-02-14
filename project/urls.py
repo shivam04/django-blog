@@ -21,11 +21,10 @@ from django.conf.urls.static import static
 from rest_framework_jwt.views import obtain_jwt_token
 from accounts.views import(login_view, register_view, logout_view)
 from django.contrib.auth import views as auth_views
-from social_login.views import home
 urlpatterns = [
     #url(r'^', include("posts.urls")),
     url(r'^admin/', admin.site.urls),
-    url(r'^home/$', home, name='home'),
+    #url(r'^home/$', home, name='home'),
     #url(r'^login/$', auth_views.login, name='login'),
     #url(r'^logout/$', auth_views.logout, name='logout'),
     #url(r'^oauth/', include('social.apps.django_app.urls', namespace='social')),
@@ -34,7 +33,6 @@ urlpatterns = [
     url(r'^logout/', logout_view, name="logout"),
     url(r'^register/', register_view, name="register"),
     url(r'^', include("posts.urls",namespace="posts")),
-     url(r'^api/auth/token/', obtain_jwt_token),
     url(r'^api/users/', include("accounts.api.urls", namespace='users-api')),
     url(r'^api/comments/', include("comments.api.urls", namespace='comments-api')),
     url(r'^api/posts/', include("posts.api.urls",namespace="posts-api")),

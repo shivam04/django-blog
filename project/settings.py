@@ -42,12 +42,9 @@ INSTALLED_APPS = [
     'markdown_deux',
     'pagedown',
     'rest_framework',
-    'social.apps.django_app.default',
     #local
     'comments',
     'posts',
-    'social_login',
-    'social_django',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
